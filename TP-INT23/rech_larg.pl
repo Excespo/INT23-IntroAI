@@ -150,11 +150,12 @@ ajouter_successeurs([Successeur | Reste], Frontiere, NouvelleFrontiere) :-
     ajouter_successeurs(Reste, TmpFrontiere, NouvelleFrontiere).
 
 /* rech_larg_aux(Frontiere, Visite, Sol, NNA, NND)
- *
- *
- * NNA est le nombre des noeuds, contenant les noeuds visites et les noeuds a visiter.
- * NND le nombre des noeuds a visiter.
- */
+    * Frontiere est la liste des noeuds a visiter
+    * Visite est la liste des noeuds deja visites
+    * Sol est le chemin solution
+    * NNA est le nombre des noeuds, contenant les noeuds visites et les noeuds a visiter.
+    * NND le nombre des noeuds a visiter.
+    */
 rech_larg_aux([], _, _, 0, 0). % Pas de solution
 rech_larg_aux([nd(E, Pere)|_], _, Sol, NNA, NND):- % E est le but
     but(E),
@@ -170,11 +171,19 @@ rech_larg_aux([nd(E, Pere) | ResteFrontiere], Visites, Sol, NNA, NND) :-
     NNA is NNA1 + 1, 
     NND is NND1 + 1.
 
+/* rech_larg(E, Sol, NNA, NND)
+ * E est l'etat initial
+ * Sol est le chemin solution
+ * NNA est le nombre des noeuds, contenant les noeuds visites et les noeuds a visiter.
+ * NND le nombre des noeuds a visiter.
+ */
+rech_larg(E, Sol, NNA, NND) :-
+    rech_larg_aux([nd(E, nil)], [], Sol, NNA, NND).
 
 /*** TEST ***
 *
 * swipl cruches.pl
-* `rech_larg.pl`.
+* ['rech_larg.pl'].
 * rech_larg(ec(0, 0), Sol, NNA, NND).
 * Sol = [ec(0, 0), ec(0, 7), ec(5, 2), ec(0, 2), ec(2, 0), ec(2, 7), ec(5, 4)],
 NNA = 262,

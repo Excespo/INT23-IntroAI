@@ -188,10 +188,9 @@ operateurs_valides(Etat, Operators3) :-
 
 /* evalution heuristique */
 % h1 : nombre de pièces mal placées
-eval_heuristique(h1, Etat, H) :-
-	but(B),
+eval_heuristique(h1, Etat, Cout_H) :-
+	et(A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1, M1, N1, O1, P1, _) = et(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,16),
 	Etat = et(A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, _),
-	B = et(A1, B1, C1, D1, E1, F1, G1, H1, I1, J1, K1, L1, M1, N1, O1, P1, _),
     dif(A, A1, D1),
     dif(B, B1, D2),
     dif(C, C1, D3),
@@ -208,7 +207,7 @@ eval_heuristique(h1, Etat, H) :-
     dif(N, N1, D14),
     dif(O, O1, D15),
     dif(P, P1, D16),
-    H is D1 + D2 + D3 + D4 + D5 + D6 + D7 + D8 + D9 + D10 + D11 + D12 + D13 + D14 + D15 + D16.
+    Cout_H is D1 + D2 + D3 + D4 + D5 + D6 + D7 + D8 + D9 + D10 + D11 + D12 + D13 + D14 + D15 + D16.
 
 dif(X, X, 0) :- 
 	!.
@@ -217,5 +216,7 @@ dif(_, _, 1).
 /* test
 
 but(B), eval_heuristique(h1, B, H).
+
+eval_heuristique(h1, et(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,0,16), H).
 
 */

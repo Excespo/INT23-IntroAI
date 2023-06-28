@@ -49,25 +49,25 @@ operateur(o2p,o,p,9).
 operateur(o2q,o,q,9).
 
 /* Etats terminaux */
-terminal(p).
-terminal(q).
+but(p).
+but(q).
 
 /* heuristique terminaux */
 
-h(h1,a,17).
-h(h1,b,15).
-h(h1,c,15).
-h(h1,e,17).
-h(h1,f,15).
-h(h1,g,15).
-h(h1,h,10 ).
-h(h1,i,9).
-h(h1,j,7).
-h(h1,k,9).
-h(h1,l,8).
-h(h1,m,2).
-h(h1,n,7).
-h(h1,o,6).
-h(h1,p,0).
-h(h1,q,0).
+eval_heuristique(h1,a,17).
+eval_heuristique(h1,b,15).
+eval_heuristique(h1,c,15).
+eval_heuristique(h1,e,17).
+eval_heuristique(h1,f,15).
+eval_heuristique(h1,g,15).
+eval_heuristique(h1,h,10 ).
+eval_heuristique(h1,i,9).
+eval_heuristique(h1,j,7).
+eval_heuristique(h1,k,9).
+eval_heuristique(h1,l,8).
+eval_heuristique(h1,m,2).
+eval_heuristique(h1,n,7).
+eval_heuristique(h1,o,6).
+eval_heuristique(h1,p,0).
+eval_heuristique(h1,q,0).
 

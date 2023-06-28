@@ -21,7 +21,7 @@
 
 rech_A(Etat, Solution, H, NNA, NND) :-
     retractall(parent(_, _, _)),
-    h(H, Etat, Cout_F),
+    eval_heuristique(H, Etat, Cout_F),
     boucle([nd(Etat, Cout_F, 0)], Terminal, H, 1, NND),
     calculer_solution(Terminal, [Terminal], Solution),
     findall(E, parent(E, _, _), Liste),
@@ -36,7 +36,7 @@ rech_A(Etat, Solution, H, NNA, NND) :-
 ***************************************************************************/
 boucle(Queue, Terminal, H, NND, NND_Final) :-
     dequeue(Queue, nd(Etat, _, Etat_G), TQueue),
-    (terminal(Etat) -> 
+    (but(Etat) -> 
         Terminal = Etat,
         NND_Final = NND;
         (
@@ -56,7 +56,7 @@ expand([], Queue, QueueFinal, _, _, _) :-
     QueueFinal = Queue.
 
 expand([route(Voisin, Cout)|Voisins], Queue, QueueFinal, H, Parent, Parent_G) :-
-    h(H, Voisin, Cout_H),
+    eval_heuristique(H, Voisin, Cout_H),
     Cout_G is Cout + Parent_G,
     Cout_F is Cout_G + Cout_H,
     enqueue(nd(Voisin, Cout_F, Cout_G), Queue, NewQueue),
@@ -111,9 +111,25 @@ enqueue_aux(Element, [Head|Tail], [Head|NewTail]) :-
 
 dequeue([Head|Tail], Head, Tail).
 
-/* Test
-* ?- rech_A(a, Solution, h1, NNA, NND).
-* Solution = [a, f, h, l, o, m, q],
-* NNA = 14,
-* NND = 12 .
+/* Test sur TP4
+
+?- [tp4].
+true.
+
+?- [rech_A].
+true.
+
+?- rech_A(a, Solution, h1, NNA, NND).
+Solution = [a, f, h, l, o, m, q],
+NNA = 14,
+NND = 12 .
+
+*/
+
+/* Test sur taquin
+
+?- E = et(0, 2, 3, 4, 11, 5, 6, 8, 1, 10, 7, 12, 9, 13, 14, 15, 1), rech_A(E, Solution, h1, NNA, NND).
+
+?- E = et(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 0, 15, 15), rech_A(E, Solution, h1, NNA, NND).
+
 */
